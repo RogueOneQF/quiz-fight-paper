@@ -1,0 +1,53 @@
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = ../main.tex
+% !TEX spellcheck = en-GB
+
+\documentclass[final, 11pt, a4paper, titlepage]{article}
+\makeatletter
+\AtBeginDocument{\let\hl\@firstofone}
+\makeatother
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{wallpaper}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage[
+	backend=biber,
+	citestyle=numeric-comp,
+	hyperref,
+	backref,
+	sorting=none
+]{biblatex}
+
+\graphicspath{{images/}}
+
+\input{config/bibliography}
+
+\newcommand{\university}{Università degli Studi di Padova}
+\newcommand{\dept}{Department of Mathematics}
+\newcommand{\faculty}{Master Degree in Computer Science}
+\newcommand{\myyear}{Academic Year 2016/17}
+\renewcommand{\title}{QuizFight}
+\newcommand{\subtitle}{An Android trivia quiz application}
+\newcommand{\fstauthor}{Alex Beccaro - 1156235}
+\newcommand{\sndauthor}{Emanuele Carraro - 1155105}
+\newcommand{\trdauthor}{Matteo Di Pirro - 1154231}
+
+\begin{document}
+	\input{config/titlepage}
+	\tableofcontents
+	\newpage
+	%\input{sections/nameOfTheSectionFile}	
+	
+	%%bibliography
+	%\newpage
+	%\nocite{*}
+	%\printbibliography 
+	
+\end{document}
