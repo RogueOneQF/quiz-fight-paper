@@ -30,13 +30,13 @@ A game can write an arbitrary number of Saved Games for a single player, subject
 Figure~\ref{fig:saved-games-hierarchy} shows how we interact with Saved Games.
 \begin{figure}
 	\centering
-	\includegraphics[width=1.2\linewidth]{SavedGamesHierarchy}
+	\includegraphics[width=0.9\linewidth]{SavedGamesHierarchy}
 	\caption{Saved Games Hierarchy}
 	\label{fig:saved-games-hierarchy}
 \end{figure}
 
 \texttt{SavedGamesActivity} is a base abstract class implementing the interaction with Saved Games. In order to handle configuration changes it uses a headless fragment, \texttt{SavedGamesFragment}. It also stores a boolean flag set to \texttt{true} when a configuration change occurs. In this way its subclasses are able to recognize that, behaving accordingly. 
 
-\texttt{Snapshot} is the class containing the blob representing the user's data. To avoid its loading in the UI thread, we use an \texttt{AsyncTaskLoader}, \\\texttt{SavedGamesLoader}. Following Google's best practices, we handle the possibility of conflicts by loading the most recent instance. Even if we could save more than one \texttt{Snapshot}, we prefer storing just one. This is an opportunistic choice: we have no reason to do otherwise.
+To avoid a heavy loading in the UI thread, we use an \texttt{AsyncTaskLoader}, \texttt{SavedGamesLoader}. Following Google's best practices, we handle the possibility of conflicts in Saved Games by loading the most recent instance. Even if we could save more than one \texttt{Snapshot}, we prefer storing just one. This is an opportunistic choice: we have no reason to do otherwise.
 
-Once loaded, the \texttt{Snapshot} gives us a bytes array. We use a bunch of classes implementing \texttt{Serializable} in order to deserialize that array. For this end, we use \texttt{SavedGames}. It is basically a companion class providing static methods for serializing and deserializing bytes. We use that class also for committing the \texttt{Snapshot}'s modification. That is an asynchronous operation by Google's construction, thus there is no need to use another \texttt{Loader} for that.
+We use a bunch of classes implementing \texttt{Serializable} in order to deserialize the blob provided by Google. For this end, we use \texttt{SavedGames}. It is basically a companion class providing static methods for serializing and deserializing bytes. 
