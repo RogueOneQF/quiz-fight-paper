@@ -1,0 +1,22 @@
+\section{Facebook login}
+
+In QuizFight, a user can challenge her friends on Facebook.
+Although we could have let a user to search an adversary among her Google
+contacts, we preferred to give her the possibility to log in with Facebook.
+This decision is based on the observation that probably a person has more
+friends on Facebook than contacts on Google.
+
+In \texttt{HomeActivity}, a user can log in with Facebook and then, in
+
+\texttt{StartDuelActivity} she can take a look at the list of
+Facebook friends and choose one as adversary. \\
+
+QuizFight requires the user\_friends permission in order to display the
+list of a user's Facebook friends.
+
+When a user log in with Facebook, her Facebook id is sent to the server and
+saved to the correspondent user entry.
+
+Then, when a user challenge a Facebook friend, the Facebook id of the friend
+is retrieved and used to find the corrispondent GGame username.
+Finally, the duel can start.
