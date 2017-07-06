@@ -133,12 +133,44 @@ They neither never stop themselves or are stopped by any other QuizFight
 component. 
 
 \subsection{Server side}
-QuizFight's server is responsible for sending out notifications to clients. As we said, each app's instance is identified by using a unique token which life-cycle is managed by FCM. Nonetheless, we have to provide a way to handle token changes and multiple tokens for the same user. Fortunately, FCS allows us to send out almost 1000 messages at a time. We believe a user will not use more than 1000 devices with our application, so we consider this as a safe bound.
+QuizFight's server is responsible for sending out notifications to clients.
+As we said, each app's instance is identified by using a unique token which
+life-cycle is managed by FCM.
 
-Any time the token varies the client sends the new one to the server. It also sends \texttt{Settings.Secure.ANDROID\_ID}. Android discourages the use of such an identifier and recommends alternatives such as \textbf{Instance ID} or \textbf{globally unique ID} (GUID). Unfortunately those solutions are not suitable for our purposes. In fact, they provide a way to identify an application's \textit{instance}, but we already have something like that (i.e. FCM's tokens). Another solution could be the \textbf{Advertising IDs}, but they are user-resettable. This is why we had to rely on a non-resettable hardware identifier, such as \texttt{ANDROID\_ID}.
+Nonetheless, we have to provide a way to handle token changes and multiple
+tokens for the same user. Fortunately, FCS allows us to send out almost 1000
+messages at a time.
+We believe a user will not use more than 1000 devices with our application,
+so we consider this as a safe bound.
 
-The client sends also the current logged user's username. Since users are identified using their Google Games' username, there is no other way to actually identify a user server-side. Then the server simply retrieves a document representing that user, looks for the actual device and substitutes the old token with the new one. In this way as soon as the token varies the server is notified by \texttt{CustomFirebaseInstanceID} and keeps everything up to date. Of course, if no device with the actual \texttt{ANDROID\_ID} is found, a new device is added with the new token. From then on the new device will receive every notification.
+Any time the token varies the client sends the new one to the server.
+It also sends \texttt{Settings.Secure.ANDROID\_ID}.
+Android discourages the use of such an identifier and recommends
+alternatives such as \textbf{Instance ID} or \textbf{globally unique ID} (GUID).
+Unfortunately those solutions are not suitable for our purposes.
+In fact, they provide a way to identify an application's \textit{instance}, but
+we already have something like that (i.e. FCM's tokens).
+Another solution could be the \textbf{Advertising IDs}, but they are
+user-resettable.
+This is why we had to rely on a non-resettable hardware identifier, such as
+\texttt{ANDROID\_ID}.
 
-When the server has to send out a new message it looks up users by their Google Games' username. It retrieves every device and every token (which is up to date by construction) and mails both the mandatory fields and the situation-dependent payload. We developed a module, \texttt{sendMessage}, which performs lookups and sending. Every message's information is directly provided by the REST service itself, so it is entirely a decentralized architecture without any dependency between the sending module and the information to be sent out.
+The client sends also the username of the current logged user.
+Since users are identified using their Google Games usernames, there is no
+other way to actually identify a user server-side.
+Then the server simply retrieves a document representing that user, looks for
+the actual device and substitutes the old token with the new one.
+In this way as soon as the token varies the server is notified by
+\texttt{CustomFirebaseInstanceID} and keeps everything up to date.
+Of course, if no device with the actual \texttt{ANDROID\_ID} is found, a new
+device is added with the new token.
+From then on the new device will receive every notification.
 
-
+When the server has to send out a new message it looks up users by their
+Google Games username.
+It retrieves every device and every token (which is up to date by construction)
+and mails both the mandatory fields and the situation-dependent payload.
+We developed a module, \texttt{sendMessage}, which performs lookups and sending.
+Every message's information is directly provided by the REST service itself,
+so it is entirely a decentralized architecture without any dependency between
+the sending module and the information to be sent out.
