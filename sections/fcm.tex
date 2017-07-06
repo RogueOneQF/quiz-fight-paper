@@ -43,7 +43,7 @@ QuizFight uses only the former, since is simple and well suited for its
 purposes. This mode relies on installation tokens. At the very first
 installation a token is generated.
 This token is unique, but it may vary through the device's life.
-In fact, if the user reinstalls the app or if they performs a cache wipe,
+In fact, if the user re-installs the app or if they performs a cache wipe,
 the token changes.
 This is why both at client and server side a mechanism is required to
 manage the token's life cycle.
@@ -76,7 +76,7 @@ As said, the registration token may change when:
 
 \begin{itemize}
 	\item the app is restored on a new device;
-	\item the user uninstalls/reinstalls the app;
+	\item the user uninstalls/re-installs the app;
 	\item the user clears app data.
 \end{itemize}
 
@@ -133,7 +133,7 @@ They neither never stop themselves or are stopped by any other QuizFight
 component. 
 
 \subsection{Server side}
-QuizFight's server is responsible for sending out notifications to clients.
+QuizFight server is responsible for sending out notifications to clients.
 As we said, each app's instance is identified by using a unique token which
 life-cycle is managed by FCM.
 
