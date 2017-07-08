@@ -48,11 +48,13 @@ unique.
 For communicating with the server we chose the Retrofit library. It is a 
 type-safe REST client for Android (or just Java) developed by Square. 
 It provides a powerful framework for interacting with APIs and sending 
-network requests with \texttt{OkHttp}.
+network requests with the HTTP client \texttt{OkHttp}. Its request/response
+API is designed with fluent builders and immutability. It supports both 
+synchronous blocking calls and async calls with callbacks. 
 
 This library makes downloading JSON or XML data from a web API fairly 
 straightforward. Once the data is downloaded then it is parsed into a 
-Plain Old Java Object (POJO) which must be defined for each ''resource'' 
+Plain Old Java Object (POJO) which must be defined for each ``resource'' 
 in the response.
 
 The communication obviously requires the \texttt{android.permission.INTERNET}
@@ -60,7 +62,7 @@ permission. We share only JSON objects. As aforementioned, our server is
 specifically designed for being efficient in JSON handling. Even if a 
 communication paradigm based on XML would be more secure (as XML has a schema
 defining exactly how the document should be), the JSON alternative is simpler 
-and faster. Further, we do not need an absolute confidence in the document. If
+and faster. Furthermore, we do not need an absolute confidence in the document. If
 one or more required fields are missing, the server notifies the client using an
 error response.
 
@@ -115,5 +117,5 @@ new AddToken(new User(
 	
 	@Override
 	public void onFailure(Call<ResponseBody> call, Throwable t) {}
-});
+}, getApplication());
 \end{lstlisting}
