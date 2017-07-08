@@ -1,4 +1,4 @@
-\section{Limitations}
+\section{Limitations and further work}
 
 As said, in this very first version a user must sign in with Google Games.
 This is necessary because we identify users with GGames usernames.
@@ -6,7 +6,7 @@ This is necessary because we identify users with GGames usernames.
 Anyway, since this an Android application, users must have a Gmail address and
 must have registered that in Android.
 
-Furthermore, if a user is interested in Games she will probably have a Games
+Furthermore, if a user is interested in Games they will probably have a Games
 account.
 This is why we don't think this is a big limitation.
 A number of solutions are possible to address that.
@@ -28,4 +28,13 @@ A clever application could offer support for different question types, such as
 open questions.
 That would require a natural language parser, probably supported by some kind of AI
 algorithms.
-We could also provide funnier way to dare players, such as group duels.
+We could also provide funnier way to dare players, such as group duels. \\
+
+Lastly, it has to be noted that currently only authorized users are able to sign
+in, both with Facebook and Google. In fact, since QuizFight has not been
+published, only the developers may log in. This is not a limitation in the 
+common sense, since once published the problem disappears. Anyhow, until then,
+we have to explicitly authorize every user via both Google and Facebook Identity
+and Access Management's engines. Further, since the authorization process 
+requires an SSH key to be used, even the actual Android Studio's instance must
+be allowed to execute the application. 
