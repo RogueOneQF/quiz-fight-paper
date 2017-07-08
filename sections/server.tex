@@ -43,3 +43,77 @@ This pattern, although possible, rapidly deteriorates to a lot of unnecessary
 requests.
 We then prefer using usernames, which we know by Google's assurance to be
 unique.
+
+\subsection{Client-server communication}
+For communicating with the server we chose the Retrofit library. It is a 
+type-safe REST client for Android (or just Java) developed by Square. 
+It provides a powerful framework for interacting with APIs and sending 
+network requests with \texttt{OkHttp}.
+
+This library makes downloading JSON or XML data from a web API fairly 
+straightforward. Once the data is downloaded then it is parsed into a 
+Plain Old Java Object (POJO) which must be defined for each ''resource'' 
+in the response.
+
+The communication obviously requires the \texttt{android.permission.INTERNET}
+permission. We share only JSON objects. As aforementioned, our server is 
+specifically designed for being efficient in JSON handling. Even if a 
+communication paradigm based on XML would be more secure (as XML has a schema
+defining exactly how the document should be), the JSON alternative is simpler 
+and faster. Further, we do not need an absolute confidence in the document. If
+one or more required fields are missing, the server notifies the client using an
+error response.
+
+Using JSON arises a problem at client side. Java is a strongly typed language, so we
+cannot freely manipulate objects as in JavaScript. We need a way to cast a JSON 
+object into a Java (POJO) one. We do that using Gson, a Google's library for 
+serializing and deserializing JSON objects. 
+
+Following the object-oriented programming paradigm we design a scalable and easily 
+manageable architecture for REST calls. Figure~\ref{fig:retrofit} shows a partial
+class diagram for that. Only two concrete API calls are shown; for the others it 
+is exactly the same.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{Retrofit}
+	\caption{High-level class diagram for API calls}
+	\label{fig:retrofit}
+\end{figure}
+
+\texttt{RetrofitHelper} is the actual entry point. Its method \texttt{getAPIService()}
+configures every parameter required, such as the base URL, the timeout, and the 
+library for dealing with JSON. Then, via reflection, it creates on the fly a 
+concrete \texttt{EndpointInterface} instance. The latter actually contains the
+methods corresponding to the API calls. Retrofit allows us to specify HTTP
+parameters by using Java-based annotations, such as \texttt{@Headers} for the
+headers, and \texttt{@PUT("endpoint")} for a PUT call. 
+
+Those methods return a generic \texttt{Call<T>} object. The type parameter 
+represents the POJO object returned by the server. In this sense Retrofit is a
+type-safe REST library. The \texttt{EndpointInterface} concrete instance is then
+used by an abstract class, \texttt{APICaller}, which basically implements a mix
+of the template method and command design patterns. Each concrete class extending
+\texttt{APICall} should have a field representing the object to be sent, 
+as a parameter, to the server. Then it implements the abstract method 
+\texttt{getActualMethod()} in order to make the right call with the right 
+parameters. It is invoked by the \texttt{APICall}'s \texttt{call()} method,
+which also enqueues the actual execution to be performed in an asynchronous way. 
+
+Then, whenever a Java class wishes to communicate with the server, it must 
+instantiate the corresponding API class, give a parameter to it and provide
+two callbacks, \texttt{onResponse()} and \texttt{onFailure()}, for handling the
+corresponding situations. Listing~\ref{lst:servercall} shows an example.
+
+\begin{lstlisting}[language=Java, caption={Server call example}, label={lst:servercall}]
+new AddToken(new User(
+	Games.Players.getCurrentPlayer(client).getDisplayName(),
+	token,
+	Secure.getString(getContentResolver(), Secure.ANDROID_ID)
+)).call(new Callback<ResponseBody>() {
+	@Override
+	public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {}
+	
+	@Override
+	public void onFailure(Call<ResponseBody> call, Throwable t) {}
+});
+\end{lstlisting}
