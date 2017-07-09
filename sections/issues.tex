@@ -6,12 +6,4 @@ the problem disappears. Anyhow, until then, we have to explicitly whitelist
 every user via both Google and Facebook Identity and Access Management's engines.
 Furthermore, since the authorization process requires an SSH key to be used, 
 even the actual Android Studio's instance must be allowed to execute
-the application. \\
-
-As QuizFight has not been published, Google disables some features, such as the
-Events saving. We make use of Events for storing statistics about the duels, 
-such as how much duels, or rounds, the player has won versus the total number
-of duels or rounds. Unfortunately, Google stores Event's information only after
-the publication, so we are not able to show the actual user's data. This is the 
-reason why, in \texttt{StatsActivity}, we provide a fake view. In this way it
-is possible to see how, once published, the UI will look like. 
+the application. 
