@@ -98,11 +98,13 @@ of the template method and command design patterns. Each concrete class extendin
 \texttt{APICall} should have a field representing the object to be sent, 
 as a parameter, to the server. Then it implements the abstract method 
 \texttt{getActualMethod()} in order to make the right call with the right 
-parameters. It is invoked by the \texttt{APICall}'s \texttt{call()} method,
-which also enqueues the actual execution to be performed in an asynchronous way. 
+parameters. It is invoked by the \texttt{APICall}'s \texttt{call()} method
+(after checking for connectivity through the \texttt{QuizFightApplication}
+parameter), which also enqueues the actual execution to be performed in
+an asynchronous way.
 
 Then, whenever a Java class wishes to communicate with the server, it must 
-instantiate the corresponding API class, give a parameter to it and provide
+instantiate the corresponding API class, give parameters to it and provide
 two callbacks, \texttt{onResponse()} and \texttt{onFailure()}, for handling the
 corresponding situations. Listing~\ref{lst:servercall} shows an example.
 
