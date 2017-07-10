@@ -72,7 +72,7 @@ object into a Java (POJO) one. We do that using Gson, a Google's library for
 serializing and deserializing JSON objects. 
 
 Following the object-oriented programming paradigm we design a scalable and easily 
-manageable architecture for REST calls. Figure~\ref{fig:retrofit} shows a partial
+manageable architecture for REST calls. Figure \ref{fig:retrofit} shows a partial
 class diagram for that. Only two concrete API calls are shown; for the others it 
 is exactly the same.
 \begin{figure}[h]
@@ -106,7 +106,7 @@ an asynchronous way.
 Then, whenever a Java class wishes to communicate with the server, it must 
 instantiate the corresponding API class, give parameters to it and provide
 two callbacks, \texttt{onResponse()} and \texttt{onFailure()}, for handling the
-corresponding situations. Listing~\ref{lst:servercall} shows an example.
+corresponding situations. Listing \ref{lst:servercall} shows an example.
 
 \begin{lstlisting}[language=Java, caption={Server call example}, label={lst:servercall}]
 new AddToken(new User(
