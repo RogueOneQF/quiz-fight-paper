@@ -3,7 +3,10 @@ Currently, only authorized users are able to sign in, both with Facebook and
 Google. In fact, since QuizFight has not been published, only the developers
 may log in. This is not a limitation in the common sense, since once published
 the problem disappears. Anyhow, until then, we have to explicitly whitelist
-every user via both Google and Facebook Identity and Access Management's engines. 
+every user via both Google and Facebook Identity and Access Management's engines.
+Furthermore, since the authorization process requires an SSH key to be used, even
+the actual Android Studio’s instance must be allowed to execute the application
+(of course, this apply only to developers).
 
 Google imposes some limitations on what an application may do without
 publication. In particular, it doesn't allow us to populate leaderboard and
