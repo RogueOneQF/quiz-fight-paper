@@ -3,15 +3,12 @@ Currently, only authorized users are able to sign in, both with Facebook and
 Google. In fact, since QuizFight has not been published, only the developers
 may log in. This is not a limitation in the common sense, since once published
 the problem disappears. Anyhow, until then, we have to explicitly whitelist
-every user via both Google and Facebook Identity and Access Management's engines.
-Furthermore, since the authorization process requires an SSH key to be used, 
-even the actual Android Studio's instance must be allowed to execute
-the application. 
+every user via both Google and Facebook Identity and Access Management's engines. 
 
 Google imposes some limitations on what an application may do without
-publication. In particular, it do not allows us to populate leaderboard and
+publication. In particular, it doesn't allow us to populate leaderboard and
 events. The former is used for showing the current ranks. The latter are used
-for statistic purposes (see \texttt{StatsActivity}). Fortunately, for them we
+for statistics purposes (see \texttt{StatsActivity}). Fortunately, for them we
 can also use SavedGames, computing by hand the required information. Nonetheless,
 for the leaderboard, there is no way to do that without requiring a dedicated
 server's API, which we consider a useless effort. The code for managing ranks
