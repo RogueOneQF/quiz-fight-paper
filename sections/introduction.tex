@@ -1,0 +1,50 @@
+\section{Introduction}
+
+The benefits of a gaming approach for learning are well-known. In fact,
+people learn better and more when they play games. We are never tired of
+playing.
+After all, games mean fun. And fun means that our minds are relaxed and open
+for gaining new knowledge.
+This is why, over the last few years, scientists have begun to commission
+more and more scientific games.
+The goal is to involve people in science and let them learn new things.
+
+Furthermore, nowadays there are many game shows that let people test their
+trivia knowledge.
+They are fun and useful because they allow both competitors and audience to
+learn new things, while playing.
+We develop QuizFight, a trivia quiz application allowing users to test their
+trivia knowledge.
+Contrariwise to popular game shows, we cannot reward users with money.
+Instead they gain experience. 
+
+The basic flow is simple. We identify a set of 20 topics and users can
+dare each other with duels in three different topics.
+Users can also choose to generate random topics for a duel.
+Hence, a duel comprises of three different rounds each of which comprises
+of five questions.
+Each question has an associate difficulty level determining its score.
+Difficulty levels range in [1, 3].
+There are almost 1000 different questions available.
+
+QuizFight ``programmatic'' goal is, on the other hand, to test how easily an
+Android application can interact with different well-known service providers,
+such as Google Play Services and Facebook.
+
+We found that using their services is pretty simple, even if the learning curve
+is not so linear.
+
+In this paper we explain some QuizFight features and how they are
+implemented.
+We also discuss some current limitations and provide likely directions for
+future work. 
+
+The rest of this paper is organized as follows. Section~\ref{ref:design} explains
+some design details. Section~\ref{sec:server} describes the choices we made for
+QuizFight's server and how the Android application interacts with it. 
+Section~\ref{sec:fcm} is about how notifications are sent to the clients.
+Sections~\ref{sec:fb} and \ref{sec:ggames} illustrate how our application
+interacts with both Facebook and Google for providing a consistent user
+experience. Sections~\ref{sec:issues} describes some known issues due 
+our use of Google Games. Our work is then concluded in Section~\ref{sec:limitations},
+where we provide some lines for further work.

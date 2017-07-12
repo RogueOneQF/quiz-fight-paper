@@ -3,7 +3,7 @@
 % !TEX root = ../main.tex
 % !TEX spellcheck = en-GB
 
-\documentclass[final, 11pt, a4paper, titlepage]{article}
+\documentclass[final, 11pt, a4paper, titlepage, dvipsnames]{article}
 \makeatletter
 \AtBeginDocument{\let\hl\@firstofone}
 \makeatother
@@ -16,6 +16,7 @@
 \usepackage{wallpaper}
 \usepackage{color}
 \usepackage{mathtools}
+\usepackage{listings}
 \usepackage{amssymb}
 \usepackage[
 	backend=biber,
@@ -28,6 +29,7 @@
 \graphicspath{{images/}}
 
 \input{config/bibliography}
+\input{config/lstlisting}
 
 \newcommand{\university}{Università degli Studi di Padova}
 \newcommand{\dept}{Department of Mathematics}
@@ -43,9 +45,16 @@
 	\input{config/titlepage}
 	\tableofcontents
 	\newpage
-	%\input{sections/nameOfTheSectionFile}	
+	\input{sections/introduction}	
+	\input{sections/design}
+	\input{sections/server}
+	\input{sections/fcm}
+	\input{sections/facebook}
+	\input{sections/googlegames}
+	\input{sections/issues}
+	\input{sections/limitations}
 	
-	%%bibliography
+	%bibliography
 	%\newpage
 	%\nocite{*}
 	%\printbibliography 
