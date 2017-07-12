@@ -7,3 +7,14 @@ every user via both Google and Facebook Identity and Access Management's engines
 Furthermore, since the authorization process requires an SSH key to be used, 
 even the actual Android Studio's instance must be allowed to execute
 the application. 
+
+%Google imposes some limitations on what an application may do without
+%publication. In particular, it do not allows us to populate leaderboard and
+%events. The former is used for showing the current ranks. The latter are used
+%for statistic purposes (see \texttt{StatsActivity}). Fortunately, for them we
+%can also use SavedGames, computing by hand the required information. Nonetheless,
+%for the leaderboard, there is no way to do that without requiring a dedicated
+%server's API, which we consider a useless effort. The code for managing ranks
+%is directly provided by Google, so we are sure it works. Publishing QuizFight
+%would allow users to see their position in the worldwide rank and even dare top
+%players. Without publication, anyway, Google disallow this feature.
